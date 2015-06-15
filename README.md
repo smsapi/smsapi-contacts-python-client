@@ -16,7 +16,7 @@ If You have pip installed:
 
 else You can install manually:
 
-    git clone https://github.com/smsapi/smsapi-python-client.git
+    git clone https://github.com/smsapi/smsapi-contacts-python-client.git
 
     cd smsapi-contacts-python
 

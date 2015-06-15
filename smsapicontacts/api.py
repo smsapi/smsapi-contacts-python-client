@@ -20,8 +20,8 @@ class ContactsApi(object):
         """
         Args:
             username (string): Api username.
-            password (string): Api password in md5 format.
-            auth (class): Auth handler, default BasicAuth.
+            password (string): Api password in plain text format.
+            auth (object): Auth handler, default BasicAuth.
         """
 
         super(ContactsApi, self).__init__()
