@@ -1,11 +1,11 @@
 #!/usr/bin/env python
 
-from smsapicontacts import __version__, __name
+from smsapicontacts import __version__
 
 from setuptools import setup, find_packages
 
 setup(
-    name=__name,
+    name='smsapi-contacts',
     version=__version__,
     description='Python client for SMSAPI contacts rest API.',
     long_description=open('README.md').read(),
