@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+import os
+import json
 import unittest
 import pkgutil
 import requests
@@ -25,6 +27,12 @@ class ContactsTestCase(unittest.TestCase):
 
         def assertIsNotNone(self, x):
             assert x is not None, "%x is None" % x
+
+    def load_fixture(self, fixture):
+        with open(os.path.abspath(os.path.dirname(__file__)) + '/fixtures/%s.json' % fixture) as f:
+            data = f .read()
+
+        return json.loads(data)
 
 
 def import_from_string(name):

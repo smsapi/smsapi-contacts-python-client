@@ -4,7 +4,7 @@ import unittest
 
 from datetime import datetime, date
 
-from smsapicontacts.models import ContactModel, GroupModel, GroupPermissionModel, ModelCollection
+from smsapicontacts.models import ContactModel, GroupModel, GroupPermissionModel, ModelCollection, CustomFieldModel
 from smsapicontacts.exception import ContactsApiError
 
 from tests import ContactsTestCase
@@ -112,7 +112,12 @@ class ContactsApiTest(ContactsTestCase):
         self.api.pin_contact_to_group(group_id=1, contact_id=1)
 
     def test_list_custom_fields(self):
-        self.api.list_custom_fields()
+        r = self.api.list_custom_fields()
+
+        fixture = self.load_fixture('list_custom_fields')['response']['collection'][0]
+
+        self.assertIsInstance(r, ModelCollection)
+        self.assertEqual(r[0], CustomFieldModel.from_dict(fixture))
 
     def test_create_custom_field(self):
         self.api.create_custom_field()

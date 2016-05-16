@@ -14,6 +14,12 @@ class Model(object):
 
         return cls(**kwargs)
 
+    def __eq__(self, other):
+        return other and self.__dict__ == other.__dict__
+
+    def __ne__(self, other):
+        return not self.__eq__(other)
+
 
 class ModelCollection(list):
 
@@ -49,7 +55,6 @@ class ContactModel(Model):
         self.email = kwargs.get('email')
         self.source = kwargs.get('source')
         self.description = kwargs.get('description')
-
         self.birthday_date = kwargs.get('birthday_date')
         self.date_created = kwargs.get('date_created')
         self.date_updated = kwargs.get('date_updated')
@@ -94,7 +99,7 @@ class CustomFieldModel(Model):
     def __init__(self, **kwargs):
         super(CustomFieldModel, self).__init__()
 
-        self.id = kwargs.get('idd')
+        self.id = kwargs.get('id')
         self.name = kwargs.get('name')
         self.type = kwargs.get('type')
 
