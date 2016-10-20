@@ -25,7 +25,7 @@ else You can install manually:
 ## USAGE:
 
 ```python
-    from contacts.api import ContactsApi
+    from smsapicontacts.api import ContactsApi
 
     api = ContactsApi(username=api_username, password=api_password)
 ```
