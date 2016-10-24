@@ -106,7 +106,7 @@ else You can install manually:
 #### Error handling
 
 ```python
-    from smsapi.exception import ContactsApiError
+    from smsapicontacts.exception import ContactsApiError
 
     try:
         contact = api.create_contact(phone_number=123123)
