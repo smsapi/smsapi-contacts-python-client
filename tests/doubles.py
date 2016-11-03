@@ -9,20 +9,23 @@ from smsapicontacts.api import ContactsApi
 last_called_api_method = None
 
 
-def request_fake(*args, **kwargs):
-    """
-    Fake request object map api method call to fixtures json file.
-    """
+class RequestFake(object):
 
-    dir = os.path.abspath(os.path.dirname(__file__))
+    def __call__(self, *args, **kwargs):
+        self.http_method, self.url = args
 
-    with open('%s/fixtures/%s.json' % (dir, last_called_api_method)) as f:
-        response = json.loads(f.read())
+        self.headers = kwargs.get('headers')
+        self.data = kwargs.get('data')
 
-    status_code = response.get('status_code')
-    content = response.get('response')
+        dir = os.path.abspath(os.path.dirname(__file__))
 
-    return ResponseMock(status_code, content)
+        with open('%s/fixtures/%s.json' % (dir, last_called_api_method)) as f:
+            response = json.loads(f.read())
+
+        status_code = response.get('status_code')
+        content = response.get('response')
+
+        return ResponseMock(status_code, content)
 
 
 class ResponseMock(object):

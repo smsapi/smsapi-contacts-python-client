@@ -8,9 +8,7 @@ import requests
 
 from smsapicontacts.compat import is_py26
 
-from tests.doubles import request_fake, TestContactsApi
-
-requests.request = request_fake
+from tests.doubles import TestContactsApi, RequestFake
 
 api_username = 'must_not_be_empty'
 api_password = 'must_not_be_empty'
@@ -19,6 +17,10 @@ api_password = 'must_not_be_empty'
 class ContactsTestCase(unittest.TestCase):
 
     def setUp(self):
+        self.request_fake = RequestFake()
+
+        requests.request = self.request_fake
+
         self.api = TestContactsApi(username=api_username, password=api_password)
 
     if is_py26:

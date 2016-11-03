@@ -85,7 +85,8 @@ class ContactsApi(object):
         method='GET',
         path='contacts/groups',
         mapping=(GroupModel, ModelCollection),
-        accept_parameters=['group_id', 'name']
+        accept_parameters=['group_id', 'name'],
+        force_parameters={'with': 'contacts_count'}
     )
 
     create_group = bind_api_endpoint(
@@ -105,7 +106,8 @@ class ContactsApi(object):
         method='GET',
         path='contacts/groups/{group_id}',
         mapping=GroupModel,
-        accept_parameters=['group_id']
+        accept_parameters=['group_id'],
+        force_parameters={'with': 'contacts_count'}
     )
 
     update_group = bind_api_endpoint(

@@ -21,6 +21,8 @@ def bind_api_endpoint(**config):
 
         accept_parameters = config.get('accept_parameters')
 
+        force_parameters = config.get('force_parameters')
+
         def __init__(self, api, parameters):
 
             super(ApiEndpoint, self).__init__()
@@ -39,6 +41,9 @@ def bind_api_endpoint(**config):
             for key, val in self.parameters.items():
                 if key in self.accept_parameters:
                     compiled_parameters[key] = convert_to_utf8_str(val)
+
+            if self.force_parameters:
+                compiled_parameters.update(self.force_parameters)
 
             self.parameters = compiled_parameters
 

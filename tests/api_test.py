@@ -4,6 +4,7 @@ import unittest
 
 from datetime import datetime, date
 
+from smsapicontacts.api import ContactsApi
 from smsapicontacts.models import ContactModel, GroupModel, GroupPermissionModel, ModelCollection, CustomFieldModel
 from smsapicontacts.exception import ContactsApiError
 
@@ -69,6 +70,9 @@ class ContactsApiTest(ContactsTestCase):
     def test_list_groups(self):
         self.api.list_groups()
 
+        self.assertEqual(ContactsApi.host + 'contacts/groups', self.request_fake.url)
+        self.assertEqual({'with': 'contacts_count'}, self.request_fake.data)
+
     def test_create_group(self):
         self.api.create_group()
 
@@ -83,6 +87,9 @@ class ContactsApiTest(ContactsTestCase):
 
         for p in group.permissions:
             self.assertIsInstance(p, GroupPermissionModel)
+
+        self.assertEqual(ContactsApi.host + 'contacts/groups/1', self.request_fake.url)
+        self.assertEqual({'with': 'contacts_count'}, self.request_fake.data)
 
     def test_update_group(self):
         self.api.update_group(group_id=1)
